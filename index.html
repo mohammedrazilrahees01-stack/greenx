@@ -1843,6 +1843,41 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
                 }, 1600);
             }
         });
+
+        /* =========================
+   SPA ROUTING (NO #)
+========================= */
+
+        // Handle navigation clicks
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const id = this.getAttribute('href').replace('#', '');
+                const section = document.getElementById(id);
+
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+
+                    // Update URL WITHOUT #
+                    history.pushState(null, '', '/' + id);
+                }
+            });
+        });
+
+        // Handle page load (direct URL access)
+        window.addEventListener('load', () => {
+            const path = window.location.pathname.replace('/', '');
+
+            if (path) {
+                const section = document.getElementById(path);
+                if (section) {
+                    setTimeout(() => {
+                        section.scrollIntoView();
+                    }, 300);
+                }
+            }
+        });
     </script>
 
 </body>
