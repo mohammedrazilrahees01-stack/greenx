@@ -934,24 +934,32 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
         /* Custom Toast Notification */
         .toast {
             position: fixed;
-            bottom: -100px;
             left: 50%;
-            transform: translateX(-50%);
+            bottom: 20px;
+            transform: translate(-50%, 100px);
+
             background: var(--primary);
-            color: var(--white);
-            padding: 1rem 2rem;
+            color: white;
+            padding: 1rem 1.8rem;
             border-radius: 50px;
+
             font-weight: 500;
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: var(--shadow-lg);
-            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 2000;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+
+            transition: all 0.4s ease;
         }
 
         .toast.show {
-            bottom: 40px;
+            transform: translate(-50%, 0);
+            opacity: 1;
         }
 
         .toast i {
@@ -1198,6 +1206,223 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
                 cursor: auto;
             }
         }
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #155d3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .loader-inner {
+            text-align: center;
+            color: white;
+        }
+
+        .loader-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: logoFade 1s ease forwards;
+        }
+
+        .loader-line {
+            width: 0;
+            height: 3px;
+            background: #d4af37;
+            margin: 15px auto 0;
+            border-radius: 10px;
+            animation: loadLine 1.4s ease forwards;
+        }
+
+        @keyframes logoFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes loadLine {
+            to {
+                width: 120px;
+            }
+        }
+
+        /* =========================
+   GLOBAL RESPONSIVE SYSTEM
+========================= */
+
+        /* ---------- CONTAINER SYSTEM ---------- */
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Ultra-wide screens */
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1500px;
+            }
+        }
+
+        /* 4K / TV screens */
+        @media (min-width: 2000px) {
+            .container {
+                max-width: 1700px;
+            }
+        }
+
+        /* ---------- FLUID TYPOGRAPHY ---------- */
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+        }
+
+        p {
+            font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+        }
+
+        /* ---------- HERO HEIGHT CONTROL ---------- */
+        .hero {
+            min-height: 100vh;
+            padding: 6rem 1rem;
+        }
+
+        /* ---------- GRID SYSTEM ---------- */
+        .services-grid,
+        .projects-grid,
+        .reviews-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        /* Desktop default */
+        .services-grid,
+        .projects-grid,
+        .reviews-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Large screens */
+        @media (min-width: 1400px) {
+
+            .services-grid,
+            .projects-grid,
+            .reviews-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Ultra-wide */
+        @media (min-width: 1800px) {
+
+            .services-grid,
+            .projects-grid,
+            .reviews-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* ---------- SECTION SPACING ---------- */
+        .section {
+            padding: clamp(4rem, 8vw, 8rem) 2rem;
+        }
+
+        /* ---------- BUTTON SCALING ---------- */
+        .btn-primary,
+        .btn-secondary {
+            padding: clamp(0.8rem, 1vw, 1.2rem) clamp(1.5rem, 2vw, 2.5rem);
+            font-size: clamp(0.9rem, 1vw, 1.1rem);
+        }
+
+        /* ---------- IMAGE CONTROL ---------- */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ---------- NAVBAR FIX ---------- */
+        .nav-container {
+            padding: 1rem clamp(1rem, 3vw, 3rem);
+        }
+
+        /* ---------- MOBILE OPTIMIZATION ---------- */
+        @media (max-width: 768px) {
+
+            .nav-links {
+                width: 100%;
+            }
+
+            .hero h1 {
+                line-height: 1.2;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ---------- SMALL MOBILE ---------- */
+        @media (max-width: 480px) {
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding-top: 5rem;
+            }
+        }
+
+        /* ---------- TOUCH DEVICES ---------- */
+        @media (hover: none) {
+
+            .leaf-cursor,
+            .leaf-particle {
+                display: none !important;
+            }
+        }
+
+        /* ---------- ULTRA LARGE SCREENS (TV FEEL FIX) ---------- */
+        @media (min-width: 2200px) {
+
+            body {
+                zoom: 1.1;
+            }
+
+            .hero {
+                min-height: 90vh;
+            }
+        }
     </style>
 </head>
 
@@ -1206,8 +1431,8 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
     <div id="progressBar"></div>
     <div id="loader">
         <div class="loader-inner">
-            <div class="spinner"></div>
-            <p>GreenX Landscaping</p>
+            <div class="loader-logo">GreenX</div>
+            <div class="loader-line"></div>
         </div>
     </div>
 
@@ -1700,7 +1925,7 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
             }
 
             /* =========================
-               LEAF SYSTEM (FIXED)
+               LEAF SYSTEM
             ========================= */
             const leaf = document.querySelector('.leaf-cursor');
 
@@ -1732,7 +1957,6 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
 
                 function animateLeaf() {
 
-                    /* ===== CURSOR ===== */
                     cx += (mx - cx) * 0.1;
                     cy += (my - cy) * 0.1;
 
@@ -1745,7 +1969,6 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
                  rotate(${tilt}deg)
                  scale(1.08)`;
 
-                    /* ===== PARTICLE SPAWN (SYNCED) ===== */
                     for (let i = 0; i < 2; i++) {
                         particles.push({
                             x: cx,
@@ -1757,7 +1980,6 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
                         });
                     }
 
-                    /* ===== PARTICLE PHYSICS (FIXED) ===== */
                     particles.forEach((p, i) => {
 
                         if (!p.el) {
@@ -1767,15 +1989,12 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
                             p.el = el;
                         }
 
-                        // movement
                         p.x += p.vx + windX * 0.6;
                         p.y += p.vy + windY * 0.6;
 
-                        // soft float (no falling)
                         p.vy *= 0.96;
                         p.y -= 0.2;
 
-                        // fade
                         p.life -= 0.02;
 
                         p.el.style.left = p.x + 'px';
@@ -1818,6 +2037,26 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
             });
 
             /* =========================
+               TOAST FIX (NO STUCK)
+            ========================= */
+            const contactForm = document.getElementById('contactForm');
+            const toast = document.getElementById('toast');
+
+            if (contactForm && toast) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    toast.classList.add('show');
+
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+
+                    contactForm.reset();
+                });
+            }
+
+            /* =========================
                CLEAN SOCIAL LINKS
             ========================= */
             document.querySelectorAll('.social-icon').forEach(link => {
@@ -1826,10 +2065,37 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
                 }
             });
 
+            /* =========================
+               SPA ROUTING (NO #)
+            ========================= */
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const id = this.getAttribute('href').replace('#', '');
+                    const section = document.getElementById(id);
+
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                        history.pushState(null, '', '/' + id);
+                    }
+                });
+            });
+
+            const path = window.location.pathname.replace('/', '');
+            if (path) {
+                const section = document.getElementById(path);
+                if (section) {
+                    setTimeout(() => {
+                        section.scrollIntoView();
+                    }, 400);
+                }
+            }
+
         });
 
         /* =========================
-           LOADER (1.6s)
+           LOADER (FINAL)
         ========================= */
         window.addEventListener("load", () => {
             const loader = document.getElementById("loader");
@@ -1837,45 +2103,14 @@ STRUCTURED DATA (GOOGLE RICH RESULTS)
             if (loader) {
                 setTimeout(() => {
                     loader.style.opacity = "0";
+                    loader.style.transform = "scale(1.05)";
+
                     setTimeout(() => {
                         loader.style.display = "none";
+                        document.body.style.overflow = "auto";
                     }, 600);
-                }, 1600);
-            }
-        });
 
-        /* =========================
-   SPA ROUTING (NO #)
-========================= */
-
-        // Handle navigation clicks
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const id = this.getAttribute('href').replace('#', '');
-                const section = document.getElementById(id);
-
-                if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-
-                    // Update URL WITHOUT #
-                    history.pushState(null, '', '/' + id);
-                }
-            });
-        });
-
-        // Handle page load (direct URL access)
-        window.addEventListener('load', () => {
-            const path = window.location.pathname.replace('/', '');
-
-            if (path) {
-                const section = document.getElementById(path);
-                if (section) {
-                    setTimeout(() => {
-                        section.scrollIntoView();
-                    }, 300);
-                }
+                }, 1500);
             }
         });
     </script>
